@@ -39,4 +39,10 @@ function getMultiples(range, ...args) {
     return Array.from(result).sort((a, b) => a - b);
 }
 
-console.log(getMultiples(range(1000), 3, 5));
+function sumAll(arr) {
+    return arr.reduce((acc, val) => {
+        return acc + val;
+    }, 0);
+}
+
+console.log(sumAll(getMultiples(range(1000), 3, 5)));
