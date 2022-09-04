@@ -1,6 +1,12 @@
 "use strict";
 console.log("script.js: flotation device");
 
+function sumAll(arr) {
+    return arr.reduce((acc, val) => {
+        return acc + val;
+    }, 0);
+}
+
 function* fibonacciGen(max, div=1) {
     if (div <= 0) throw new Error("Second parameter must be greater than 0"); 
 
@@ -21,4 +27,4 @@ for (let item of generator) {
     numArray.push(item);
 }
 
-console.log(numArray);
+console.log(sumAll(numArray));
