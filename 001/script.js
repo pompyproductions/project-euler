@@ -20,8 +20,23 @@ function range(start, end, step=1) {
         arr.push(start);
         start += step;
     }
-    
+
     return isReverse ? arr.reverse() : arr;
 }
 
-console.log(range(1000));
+function getMultiples(range, ...args) {
+    // takes any number of factors
+    let result = new Set();
+    console.log(args);
+    // instead you can use filter
+    // and check for !(num % factor1 && num % factor2)
+    args.forEach((factor) => {
+        console.log(factor);
+        range.forEach((num) => {
+            if (!(num % factor)) result.add(num);
+        })
+    });
+    return Array.from(result).sort((a, b) => a - b);
+}
+
+console.log(getMultiples(range(1000), 3, 5));
