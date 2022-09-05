@@ -31,7 +31,15 @@ function findPalindromeProduct(num, ...args) {
 
 }
 
-console.log(findPalindromeProduct(999));
-console.log(findPalindromeProduct(998));
-console.log(findPalindromeProduct(997));
-console.log(findPalindromeProduct(996));
+let operand1 = 999;
+let operand2 = 1;
+let largestPalindrome = 0;
+
+while (operand1 > 99) {
+    operand2 = findPalindromeProduct(operand1);
+    console.log([operand1, operand2]);
+    if (operand1 * operand2 > largestPalindrome) largestPalindrome = operand1 * operand2;
+    operand1--;
+}
+
+console.log(largestPalindrome);
