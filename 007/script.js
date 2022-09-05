@@ -25,6 +25,7 @@ function* primeGen(max=Infinity) {
 }
 
 let generator = primeGen();
-console.log(generator.next().value);
-console.log(generator.next().value);
+for (let i = 1; i <= 10000; i++) {
+    generator.next();
+}
 console.log(generator.next().value);
