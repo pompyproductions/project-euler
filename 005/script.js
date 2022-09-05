@@ -24,7 +24,7 @@ function* primeGen(max=Infinity) {
     }
 }
 
-function findPrimeFactor(num) {
+function findSmallestPrimeFactor(num) {
     let generator = primeGen();
     let iter = generator.next();
     while (num % iter.value) {
@@ -33,4 +33,14 @@ function findPrimeFactor(num) {
     return iter.value
 }
 
-console.log(findPrimeFactor(49));
+function factorize(num) {
+    let factors = []
+    while (num > 1) {
+        let f = findSmallestPrimeFactor(num);
+        factors.push(f);
+        num /= f;
+    }
+    return factors;
+}
+
+console.log(factorize(2452));
