@@ -5,28 +5,22 @@ function isFactor(factor, number) {
     return !(number % factor);
 }
 
-function* primeGen(max) {
-    let primes = [];
-    let current = 2;
+function* primeGen(max=5000) {
+    let primes = [2];
+    let current = 3;
 
     while (current < max) {
         let isPrime = true;
         for (let item of primes) {
-            if (isFactor(item, current)) isPrime = false;
+            if (isFactor(item, current)) {
+                isPrime = false;
+                break;
+            }
         }
         if (isPrime) yield current;
         primes.push(current);
-        current++;
+        current += 2;
     }
 }
 
-let generator = primeGen(40);
-let iter = generator.next();
-let largestPrimeFactor = 1;
-
-do {
-    largestPrimeFactor = iter.value;
-    iter = generator.next();
-} while (!iter.done);
-
-console.log(largestPrimeFactor);
+let generator = primeGen();
