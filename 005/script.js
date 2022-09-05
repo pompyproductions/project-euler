@@ -83,10 +83,22 @@ function getIntersectionSet(set1, set2) {
 function mergeArrays(arr1, arr2) {
     let merge = arr1.concat(arr2);
     let commonValues = getIntersectionSet(arr1, arr2);
+    console.log(commonValues);
+    commonValues.forEach(val => {
+            let toRemove = count(arr1, val);
+            toRemove = count(arr2, val) > toRemove ? count(arr2, val) : toRemove;
+            // very inefficient up there! too many counts
+            console.log([val, toRemove]);
+            for (let i = 0; i < toRemove; i++) {
+                merge.splice(merge.findIndex(elem=>elem==val), 1);
+            }
+        }
+    )
+    return merge.sort((a,b)=>a-b)
 }
 
 let testArray = range(1, 21);
-console.log(getIntersectionSet(testArray, [0,1,2,5,25]));
+console.log(mergeArrays([1,1,1,1], [1,1,1,2]));
 
 
 // let totalFactors = new Map();
