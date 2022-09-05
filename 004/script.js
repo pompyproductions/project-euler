@@ -12,7 +12,6 @@ function isPalindrome(num) {
     while (num.length > 1) {
         if (num.substr(0, 1) === num.substr(-1, 1)) {
             num = num.substr(1, num.length - 2); 
-            console.log(num);
         } else {
             return false
         }
@@ -20,8 +19,19 @@ function isPalindrome(num) {
     return true;
 }
 
-
 function findPalindromeProduct(num, ...args) {
-    // takes one number and the following args, in order:
-    // from, to, step
+    let start = args[0] ? args[0] : num;
+    let min = args[1] ? args[1] : 1;
+    let step = args[2] ? args[2] : 1;
+
+    while (start > min) {
+        if (isPalindrome(start * num)) return start;
+        start--;
+    }
+
 }
+
+console.log(findPalindromeProduct(999));
+console.log(findPalindromeProduct(998));
+console.log(findPalindromeProduct(997));
+console.log(findPalindromeProduct(996));
