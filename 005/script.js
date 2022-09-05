@@ -85,7 +85,7 @@ function mergeArrays(arr1, arr2) {
     let commonValues = getIntersectionSet(arr1, arr2);
     commonValues.forEach(val => {
             let toRemove = count(arr1, val);
-            toRemove = count(arr2, val) > toRemove ? count(arr2, val) : toRemove;
+            toRemove = count(arr2, val) < toRemove ? count(arr2, val) : toRemove;
             // very inefficient up there! too many counts
             for (let i = 0; i < toRemove; i++) {
                 merge.splice(merge.findIndex(elem=>elem==val), 1);
@@ -101,29 +101,5 @@ while (testArray.length) {
     let num = testArray.pop();
     let numFactors = factorize(num);
     factors = mergeArrays(numFactors, factors);
-    console.log(factors);
 }
-
-// let totalFactors = new Map();
-
-// while (testArray.length) {
-//     let num = testArray.pop();
-//     new Set(factorize(num)).forEach(f => {
-//         let c = count(factorize(num), f)
-//         if (!(totalFactors.has(f)) || totalFactors[f] < c) {
-//             totalFactors.set(f, c);
-//         }
-//     })
-// }
-
-// let totalFactors = [];
-// while (testArray.length) {
-//     let num = testArray.pop();
-//     let numFactors = factorize.num();
-//     new Set(numFactors).forEach(fac => { // set so that you don't repeat the count
-//         let tot = count(factorize(num), fac);
-//         if (count(totalFactors, fac) < tot)
-//     }
-// }
-
-// console.log(totalFactors);
+console.log(factors.reduce((acc, item) => item * acc, 1));
