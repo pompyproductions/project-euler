@@ -33,4 +33,11 @@ function findPrimeFactor(num) {
     return iter.value
 }
 
-console.log(findPrimeFactor(600851475143));
+let testNumber = 13195;
+let factors = [];
+while (testNumber > 1) {
+    let primeFactor = findPrimeFactor(testNumber);
+    factors.push(primeFactor);
+    testNumber /= primeFactor;
+}
+console.log(factors);
