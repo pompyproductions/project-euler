@@ -23,3 +23,10 @@ function range(start, end, step=1) {
 
     return isReverse ? arr.reverse() : arr;
 }
+
+let squareSum = range(1,101);
+let sumSquare = squareSum.map(item => item * item);
+console.log(Math.abs(
+    sumSquare.reduce((acc, val) => val + acc, 0) - 
+    Math.pow(squareSum.reduce((acc, val) => val + acc, 0), 2)
+));
