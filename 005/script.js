@@ -71,4 +71,17 @@ function count(arr, val) {
     return arr.reduce((tot, i) => tot + (i===val), 0);
 }
 
-console.log(count([1, 1, 2, 2, 2, 3, 4, 4, 7, 7, 7, 7, 7], 7));
+let testArray = range(1, 21);
+let factorCount = new Map();
+
+while (testArray.length) {
+    let num = testArray.pop();
+    console.log(`factors of ${num}:`)
+    new Set(factorize(num)).forEach(f => {
+        let c = count(factorize(num), f)
+        if (!(factorCount.has(f)) || factorCount[f] < c) {
+            factorCount.set(f, c);
+        }
+    })
+    console.log(factorCount);
+}
