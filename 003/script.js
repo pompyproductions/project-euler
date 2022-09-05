@@ -5,7 +5,7 @@ function isFactor(factor, number) {
     return !(number % factor);
 }
 
-function* primeGen(max=5000) {
+function* primeGen(max=Infinity) {
     yield 2;
     let primes = [2];
     let current = 3;
@@ -33,7 +33,7 @@ function findPrimeFactor(num) {
     return iter.value
 }
 
-let testNumber = 13195;
+let testNumber = 600851475143;
 let factors = [];
 while (testNumber > 1) {
     let primeFactor = findPrimeFactor(testNumber);
