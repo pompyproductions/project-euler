@@ -1,6 +1,7 @@
 "use strict";
 console.log("script.js: flotation device");
 
+
 function isFactor(factor, number) {
     return !(number % factor);
 }
@@ -66,4 +67,8 @@ function range(start, end, step=1) {
     return isReverse ? arr.reverse() : arr;
 }
 
-console.log(range(20));
+function count(arr, val) {
+    return arr.reduce((tot, i) => tot + (i===val), 0);
+}
+
+console.log(count([1, 1, 2, 2, 2, 3, 4, 4, 7, 7, 7, 7, 7], 7));
