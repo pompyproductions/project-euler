@@ -6,6 +6,7 @@ function isFactor(factor, number) {
 }
 
 function* primeGen(max=5000) {
+    yield 2;
     let primes = [2];
     let current = 3;
 
