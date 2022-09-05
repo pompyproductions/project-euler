@@ -71,17 +71,44 @@ function count(arr, val) {
     return arr.reduce((tot, i) => tot + (i===val), 0);
 }
 
-let testArray = range(1, 21);
-let factorCount = new Map();
-
-while (testArray.length) {
-    let num = testArray.pop();
-    console.log(`factors of ${num}:`)
-    new Set(factorize(num)).forEach(f => {
-        let c = count(factorize(num), f)
-        if (!(factorCount.has(f)) || factorCount[f] < c) {
-            factorCount.set(f, c);
-        }
-    })
-    console.log(factorCount);
+function getIntersectionSet(set1, set2) {
+    if (set1 instanceof Array) set1 = new Set(set1);
+    if (set2 instanceof Array) set2 = new Set(set2);
+    // (too repetitive, clean this up)
+    return new Set(Array.from(set1).filter(item => set2.has(item)));
+    // also, make recursive with set1, set2, ...args; add to stack until only two parameters left
+    // you can write getIntersectionArray later on
 }
+
+function mergeArrays(arr1, arr2) {
+    let merge = arr1.concat(arr2);
+    let commonValues = getIntersectionSet(arr1, arr2);
+}
+
+let testArray = range(1, 21);
+console.log(getIntersectionSet(testArray, [0,1,2,5,25]));
+
+
+// let totalFactors = new Map();
+
+// while (testArray.length) {
+//     let num = testArray.pop();
+//     new Set(factorize(num)).forEach(f => {
+//         let c = count(factorize(num), f)
+//         if (!(totalFactors.has(f)) || totalFactors[f] < c) {
+//             totalFactors.set(f, c);
+//         }
+//     })
+// }
+
+// let totalFactors = [];
+// while (testArray.length) {
+//     let num = testArray.pop();
+//     let numFactors = factorize.num();
+//     new Set(numFactors).forEach(fac => { // set so that you don't repeat the count
+//         let tot = count(factorize(num), fac);
+//         if (count(totalFactors, fac) < tot)
+//     }
+// }
+
+// console.log(totalFactors);
