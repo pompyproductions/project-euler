@@ -18,7 +18,15 @@ function* primeGen(max) {
         primes.push(current);
         current++;
     }
-
 }
 
 let generator = primeGen(40);
+let iter = generator.next();
+let largestPrimeFactor = 1;
+
+do {
+    largestPrimeFactor = iter.value;
+    iter = generator.next();
+} while (!iter.done);
+
+console.log(largestPrimeFactor);
