@@ -24,4 +24,13 @@ function* primeGen(max=5000) {
     }
 }
 
-let generator = primeGen();
+function findPrimeFactor(num) {
+    let generator = primeGen();
+    let iter = generator.next();
+    while (num % iter.value) {
+        iter = generator.next();
+    };
+    return iter.value
+}
+
+console.log(findPrimeFactor(600851475143));
