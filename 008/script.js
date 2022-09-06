@@ -10,11 +10,15 @@ function* sequenceGen(input, length, callback, start=0) {
         if (callback(input.substr(i, length))) {
             yield input.substr(i, length);
         } else {
-            console.log("found 0, skip");
             i += length - 1;
         }
     }
     
+}
+
+function processSequence(seq, callback=(x)=>x) {
+    seq = seq.split("").map((x) => parseInt(x));
+    return callback(seq);
 }
 
 let generator = sequenceGen(PROBLEM_INPUT, 4, (val) => {
@@ -22,7 +26,11 @@ let generator = sequenceGen(PROBLEM_INPUT, 4, (val) => {
 });
 
 let currentIter = generator.next();
+let candidates = [];
 while (!currentIter.done) {
-    console.log(currentIter.value);
+    candidates.push(currentIter.value);
     currentIter = generator.next();
 }
+
+console.log(candidates[0]);
+console.log(processSequence(candidates[0]));
