@@ -21,7 +21,7 @@ function processSequence(seq, callback=(x)=>x) {
     return callback(seq);
 }
 
-let generator = sequenceGen(PROBLEM_INPUT, 4, (val) => {
+let generator = sequenceGen(PROBLEM_INPUT, 13, (val) => {
     return !val.includes("0"); // discard values with 0 in them
 });
 
@@ -32,5 +32,9 @@ while (!currentIter.done) {
     currentIter = generator.next();
 }
 
-console.log(candidates[0]);
-console.log(processSequence(candidates[0]));
+let highestValue = 0;
+candidates.forEach(item => {
+    let product = processSequence(item, arr => arr.reduce((acc,val)=>acc*val,1));
+    if (product > highestValue) highestValue = product;
+});
+console.log(highestValue);
