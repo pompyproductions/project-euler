@@ -21,4 +21,8 @@ let generator = sequenceGen(PROBLEM_INPUT, 4, (val) => {
     return !val.includes("0"); // discard values with 0 in them
 });
 
-generator.next();
+let currentIter = generator.next();
+while (!currentIter.done) {
+    console.log(currentIter.value);
+    currentIter = generator.next();
+}
