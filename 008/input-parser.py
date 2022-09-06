@@ -15,4 +15,4 @@ txt = re.search(r"<pc.*>(\d+)<\/p>", txt)
 txt = txt.group(1)
 
 f = open("input-parsed.js", "w")
-f.write("const PROBLEM_INPUT = " + txt + ";")
+f.write("const PROBLEM_INPUT = \"" + txt + "\";")
