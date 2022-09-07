@@ -14,9 +14,30 @@ function getLine(arr, x, y, mode, len=4) {
     return line
 }
 
+console.log(PROBLEM_INPUT);
+
 let largest = [];
 
-console.log(PROBLEM_INPUT);
+// check horizontals
+for (let y = 0; y < PROBLEM_INPUT.length; y++) {
+    for (let x = 0; x <= PROBLEM_INPUT[y].length - 4; x++) {
+        console.log(getLine(PROBLEM_INPUT, x, y, "h"));
+    }
+}
+for (let y = 0; y <= PROBLEM_INPUT.length - 4; y++) {
+    for (let x = 0; x < PROBLEM_INPUT[y].length; x++) {
+        console.log(getLine(PROBLEM_INPUT, x, y, "v"));
+    }
+}
+for (let y = 0; y <= PROBLEM_INPUT.length - 4; y++) {
+    for (let x = 0; x <= PROBLEM_INPUT[y].length - 4; x++) {
+        console.log(getLine(PROBLEM_INPUT, x, y, "d"));
+    }
+}
+
+
+
+
 // console.log(getLine(PROBLEM_INPUT, 0, 0, "h"));
 // console.log(getLine(PROBLEM_INPUT, 0, 0, "v"));
 // console.log(getLine(PROBLEM_INPUT, 0, 0, "d"));
