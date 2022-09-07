@@ -12,9 +12,9 @@ function* primeGen(max=Infinity) {
     let current = 3;
     let i = 0;
 
-    while (current < max) {
+    while (current <= max) {
         let isPrime = true;
-        while (primes[i] < Math.trunc(current/2)) {
+        while (primes[i] <= Math.trunc(current/primes[i-1])) {
             i++;
         }
         for (let item of primes.slice(0, i+1)) {
@@ -32,7 +32,9 @@ function* primeGen(max=Infinity) {
 
 
 let sum = 0;
-for (let prime of primeGen(1000)) {
+console.time();
+for (let prime of primeGen(500000)) {
     sum += prime;
 }
+console.timeEnd();
 console.log(sum);
