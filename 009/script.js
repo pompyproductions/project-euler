@@ -1,41 +1,26 @@
 "use strict";
 console.log("script.js: flotation device");
 
-function getPythagorean(a) {
+function* pythagoreanGen(a) {
+    // return if a+b+c > 1000
     let [b, c] = [a + 1, a + 2];
-    while (c*c !== a*a + b*b) {
-        while (c*c < a*a + b*b) {
-            c++;
+    while (a+b+c <= 1000) {
+        while (c*c !== a*a + b*b) {
+            while (c*c < a*a + b*b) {
+                c++;
+            }
+            if (c === b + 1) return;
+            b++;
         }
-        if (c === b + 1) return false;
+        yield [a,b,c];
         b++;
     }
-    return [a,b,c]
+    return;
 }
 
-
-let currentTriple;
-// first find a pythagorean triple
-for (let a = 1; !currentTriple; a++) {
-    currentTriple = getPythagorean(a);
-}
-// then find more pythagoreans until the sum is 1000
-let a = currentTriple[0];
-
-while (currentTriple.reduce((acc, val)=>acc+val, 0) !== 1000) {
-    a++;
-    {
-        let nextTriple = getPythagorean(a);
-        if (nextTriple) {
-            currentTriple = nextTriple;
-        }
-        console.log(currentTriple.reduce((acc, val)=>acc+val, 0));
-    }
-    if (a > 500) break;
-}
-
-
-
-// for (a; currentTriple.reduce((acc, val)=>acc*val, 1) !== 1000; a++) {
-    
-// }
+let generator = pythagoreanGen(21);
+console.log(generator.next().value);
+console.log(generator.next().value);
+console.log(generator.next().value);
+console.log(generator.next().value);
+console.log(generator.next().value);
