@@ -24,6 +24,9 @@ function* primeGen(max=Infinity) {
     }
 }
 
-for (let prime of primeGen(1000)) {
-    console.log(prime);
+
+let sum = 0;
+for (let prime of primeGen(100000)) {
+    sum += prime;
 }
+console.log(sum);
