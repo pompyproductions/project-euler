@@ -18,9 +18,17 @@ function* pythagoreanGen(a) {
     return;
 }
 
-let generator = pythagoreanGen(21);
-console.log(generator.next().value);
-console.log(generator.next().value);
-console.log(generator.next().value);
-console.log(generator.next().value);
-console.log(generator.next().value);
+let specialTriple;
+
+for (let i=1; i <= (Math.floor(1000 / 3) - 2); i++) {
+    let generator = pythagoreanGen(i);
+    for (let triple of generator) {
+        if (triple.reduce((acc, val)=>acc+val, 0) === 1000) {
+            specialTriple = triple;
+        }
+    }
+}
+
+if (specialTriple) {console.log(
+    specialTriple.reduce((acc, val) => acc * val, 1)
+)}
