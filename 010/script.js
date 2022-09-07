@@ -2,12 +2,13 @@
 console.log("script.js: flotation device");
 
 function isFactor(factor, number) {
-    console.log(`dividing ${number} with ${factor}`);
+    // console.log(`dividing ${number} with ${factor}`);
     return !(number % factor);
 }
 
 function* primeGen(max=Infinity) {
     yield 2;
+    yield 3;
     let primes = [2, 3];
     let current = 5;
     let i = 1;
@@ -20,7 +21,6 @@ function* primeGen(max=Infinity) {
         for (let item of primes.slice(0, i+1)) {
             if (isFactor(item, current)) {
                 isPrime = false;
-                console.log("not prime");
                 break;
             }
         }
@@ -36,7 +36,7 @@ function* primeGen(max=Infinity) {
 
 let sum = 0;
 console.time();
-for (let prime of primeGen(100)) {
+for (let prime of primeGen(2000000)) {
     sum += prime;
 }
 console.timeEnd();
