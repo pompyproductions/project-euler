@@ -1,18 +1,31 @@
 import re
 
-f = open("input.html")
+f = open("input-raw.html")
 
-# txt = ""
-# for line in f:
-#     txt += line
+inputArr = []
+
+for line in f:
+    # strip unnecessary stuff
+    line = re.sub(r"<\/?.+?>", "", line) # made non-greedy with "+?"
+    line = re.sub(r"\n", "", line)
+    
+    if re.match(r"^\d\d \d\d", line):
+        def castInt(x):
+            return int(x)
+        inputArr.append(list(map(castInt, line.split(" "))))
 
 f.close()
 
-# txt = re.sub("\s", "", txt)
-# txt = re.sub("<br\/>", "", txt)
+# convert each row (array) into string ("[a, b, c]")
+for i in range(len(inputArr)):
+    inputArr[i] = ", ".join(list(map(lambda x: str(x), inputArr[i])))
+    inputArr[i] = "[" + inputArr[i] + "]"
 
-# txt = re.search(r"<pc.*>(\d+)<\/p>", txt)
-# txt = txt.group(1)
+f = open("input-parsed.js", "w")
 
-# f = open("input-parsed.js", "w")
-# f.write("const PROBLEM_INPUT = \"" + txt + "\";")
+f.write("const PROBLEM_INPUT = [\n")
+for row in inputArr:
+    f.write("    " + row + ",\n")
+f.write("]")
+
+f.close()
