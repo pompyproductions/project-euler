@@ -1,7 +1,6 @@
 "use strict";
 console.log("script.js: flotation device");
-console.time();
-console.timeEnd();
+
 
 function* triangleGen(max=Infinity) {
     let curr = 0;
@@ -12,18 +11,27 @@ function* triangleGen(max=Infinity) {
 }
 
 function getDivisors(num) {
-    let arr = [1];
-    for (let i=2; i <= num / 2; i++) {
+    let arr = [];
+    for (let i=1; i <= num / 2; i++) {
         if (num % i === 0) arr.push(i);
     }
     arr.push(num);
     return arr;
 }
 
-const generator = triangleGen(5);
+const generator = triangleGen();
 let current = generator.next();
-console.log(getDivisors(5));
-console.log(getDivisors(6));
-console.log(getDivisors(36));
 
-// while (current.value)
+console.time();
+for (let i = 1; i <= 2000; i++) {
+    // console.log(getDivisors(current.value));
+    // console.log(getDivisors(current.value).length);
+    current = generator.next();
+    if (getDivisors(current.value).length >= 400) {
+        console.log(`Found solution in ${i} steps`);
+        break;
+    }
+}
+console.log(getDivisors(current.value));
+console.log(getDivisors(current.value).length);
+console.timeEnd();
