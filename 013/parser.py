@@ -1,31 +1,22 @@
 import re
 
-f = open("input-raw.html")
+f1 = open("input-raw.html")
+f2 = open("input-parsed.js", "w")
+
+f2.write("const PROBLEM_INPUT = [\n")
 
 inputArr = []
 
-for line in f:
+for line in f1:
     # strip unnecessary stuff
-    line = re.sub(r"<\/?.+?>", "", line) # made non-greedy with "+?"
-    line = re.sub(r"\n", "", line)
+    # line = re.sub(r"<\/?.+?>", "", line) # made non-greedy with "+?"
+    # line = re.sub(r"\n", "", line)
     
-    if re.match(r"^\d\d \d\d", line):
-        def castInt(x):
-            return int(x)
-        inputArr.append(list(map(castInt, line.split(" "))))
+    num = re.match(r"(\d{50})", line)
+    if num:
+        f2.write("    " + num.groups()[0] + ",\n")
 
-f.close()
+f1.close()
 
-# convert each row (array) into string ("[a, b, c]")
-for i in range(len(inputArr)):
-    inputArr[i] = ", ".join(list(map(lambda x: str(x), inputArr[i])))
-    inputArr[i] = "[" + inputArr[i] + "]"
-
-f = open("input-parsed.js", "w")
-
-f.write("const PROBLEM_INPUT = [\n")
-for row in inputArr:
-    f.write("    " + row + ",\n")
-f.write("]")
-
-f.close()
+f2.write("]")
+f2.close()
