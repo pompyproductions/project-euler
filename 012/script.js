@@ -11,8 +11,19 @@ function* triangleGen(max=Infinity) {
     }
 }
 
-const generator = triangleGen(5);
-
-for (let num of generator) {
-    console.log(num);
+function getDivisors(num) {
+    let arr = [1];
+    for (let i=2; i <= num / 2; i++) {
+        if (num % i === 0) arr.push(i);
+    }
+    arr.push(num);
+    return arr;
 }
+
+const generator = triangleGen(5);
+let current = generator.next();
+console.log(getDivisors(5));
+console.log(getDivisors(6));
+console.log(getDivisors(36));
+
+// while (current.value)
