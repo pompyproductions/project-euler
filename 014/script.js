@@ -1,8 +1,6 @@
 "use strict";
 console.log("script.js: flotation device");
 
-// console.time("Function 1");
-// console.timeEnd("Function 1");
 
 function* collatzGen(num) {
     // assuming all sequences end with 1
@@ -16,13 +14,15 @@ function* collatzGen(num) {
 let generator;
 let longest = [1, 1];
 
-for (let i = 2; i < 100; i++) {
+console.time("Function 1");
+for (let i = 2; i < 1000000; i++) {
     generator = collatzGen(i);
     let count = -1;
     for (let step of generator) {
         count++;
     }
-    console.log(`${count} steps taken for ${i}`);
+    // console.log(`${count} steps taken for ${i}`);
     if (count > longest[1]) longest = [i, count];
 }
+console.timeEnd("Function 1");
 console.log(longest)
