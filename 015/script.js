@@ -1,11 +1,11 @@
 "use strict";
 console.log("script.js: flotation device");
 
-function* pascalGen() {
-    // assuming all sequences end with 1
+function* pascalGen(max=Infinity) {
+    // max exists for making use of for..of
     yield [1];
     let prev = [1, 1];
-    while (true) {
+    for (let i=0; i<max; i++) {
         yield prev;
         const curr = [1];
         for (let i = 1; i < prev.length; i++) {
@@ -16,6 +16,20 @@ function* pascalGen() {
     }
 }
 
-const generator = pascalGen();
+function createLattice(side = 2) {
+    const arr = [];
+    const generator = pascalGen();
+    for (let i=0; i <= side * 2; i++) {
+        let row = generator.next().value;
+        if (i > side) {
+            row = row.slice(i - side, row.length - (i - side));
+        }
+        arr.push(row);
+    }
+    return arr;
+}
+
+console.log(createLattice());
+
 // console.time("Function 1");
 // console.timeEnd("Function 1");
