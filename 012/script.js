@@ -40,7 +40,7 @@ function* primeGen(max=Infinity) {
             i++;
         }
         for (let item of primes.slice(0, i+1)) {
-            if (isFactor(item, current)) {
+            if (!(current % item)) {
                 isPrime = false;
                 break;
             }
@@ -56,12 +56,11 @@ function* primeGen(max=Infinity) {
 
 
 function getPrimeDivisors(num) {
-    const divs = [2];
+    const divs = [];
     const generator = primeGen();
     let prime = generator.next();
-    prime = generator.next();
-    while (prime && (prime.value <= num / divs[divs.length - 1])) {
-        if (isFactor(prime.value, num)) divs.push(prime.value);
+    while (prime && (prime.value <= num / (divs.length ? divs[divs.length - 1] : 2))) {
+        if (!(num % prime.value)) divs.push(prime.value);
         prime = generator.next();
     }
     return divs;
