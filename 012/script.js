@@ -56,44 +56,48 @@ function* primeGen(max=Infinity) {
 
 
 function getPrimeDivisors(num) {
-    const divs = [];
+    const divs = [2];
     const generator = primeGen();
     let prime = generator.next();
-    while (prime && (prime.value <= num / 2)) {
+    prime = generator.next();
+    while (prime && (prime.value <= num / divs[divs.length - 1])) {
         if (isFactor(prime.value, num)) divs.push(prime.value);
         prime = generator.next();
     }
-    return new Set(divs);
+    return divs;
+}
+
+function countExponent(factor, num) {
+    let count = 0;
+    while (num % factor === 0) {
+        num /= factor;
+        count++;
+    }
+    return count;
 }
 
 function countDivisors(num) {
-    let divisors = [num];
+    let count = 1;
     const primes = getPrimeDivisors(num);
-    // console.log(`getting values from ${num}`)
+    primes.forEach(p => {
+        count *= (1 + countExponent(p, num));
+    })
     
-    if (primes.size) {
-        primes.forEach(p => {
-            divisors = divisors.concat(countDivisors(num/p));
-        })
-    }
-    // console.log(divisors);
-    return new Set(divisors);
-} // gotta love recursion
-
-// console.log(new Set(countDivisors(30)));
+    return count;
+}
 
 const generator = triangleGen();
 let current = generator.next();
 
 console.time();
-for (let i = 2; i <= 300; i++) {
-    // console.log(getDivisors(current.value));
-    // console.log(getDivisors(current.value).length);
+for (let i = 0; i <= 300; i++) {
     current = generator.next();
-    let divs = new Set(countDivisors(current.value)); 
-    if (divs.size > 499) {console.log(current.value);break}
+
+    if (countDivisors(current.value) > 5) {
+        console.log(countDivisors(current.value));
+        break;
+    } 
 }
-console.log(new Set(countDivisors(current.value)));
 
 console.timeEnd();
 
@@ -101,3 +105,7 @@ console.timeEnd();
 // prev version: 200 iterations, 103ms
 // prev version: 300 iterations, 310ms
 
+// new version: 300 iterations, 120ms
+// new version: 500 iterations, 530ms
+// new version: 1000 iterations, 5s
+// new version: 2000 iterations, 53s
