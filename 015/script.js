@@ -29,7 +29,19 @@ function createLattice(side = 2) {
     return arr;
 }
 
-console.log(createLattice());
+const lattice = createLattice(20);
+let count = 1;
 
-// console.time("Function 1");
-// console.timeEnd("Function 1");
+console.time("Function 1");
+
+for (let i = 1; i < lattice.length; i++) {
+    count += (
+        lattice[i].reduce((acc, val)=>acc+val, 0) -
+        lattice[i-1].reduce((acc, val)=>acc+val, 0)
+    )
+}
+
+console.timeEnd("Function 1");
+
+console.log(lattice);
+console.log(count);
