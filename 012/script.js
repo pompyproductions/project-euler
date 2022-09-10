@@ -10,20 +10,7 @@ function* triangleGen(max=Infinity) {
     }
 }
 
-// function getDivisors(num) {
-//     let arr = [1, num];
-//     for (let i=2; i <= num / 2; i++) {
-//         if (num % i === 0) {
-//             arr.push(i);
-//         }
-//     }
-//     console.log(num);
-//     console.log(arr);
-//     return arr;
-// }
-
 function isFactor(factor, number) {
-    // console.log(`dividing ${number} with ${factor}`);
     return !(number % factor);
 }
 
@@ -115,4 +102,4 @@ console.timeEnd();
 // final version: 2000 iterations, 434ms
 // final version: 5000 iterations, 4.8s
 // final version: 10000 iterations, 32s
-
+// RESULT: 64.5s
