@@ -3,13 +3,20 @@ console.log("script.js: flotation device");
 
 const WORDS = [
     [
-        "one", "two", "three", "four", "five", "six",
-        "seven", "eight", "nine", "ten", "eleven", "twelve",
-        "thirteen", "fourteen", "fifteen", "sixteen",
-        "seventeen", "eighteen", "nineteen"
+        "", "one", "two", "three", "four", "five", "six",
+        "seven", "eight", "nine", 
     ],
     [
-        "hundred", "thousand", "million"
+        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", 
+        "sixteen", "seventeen", "eighteen", "nineteen"
+
+    ],
+    [
+        "twenty", "thirty", "forty", "fifty", "sixty",
+        "seventy", "eighty", "ninety"
+    ],
+    [
+        "hundred", "thousand", "million", "billion", "trillion"
     ]
 ]
 
@@ -26,6 +33,10 @@ function getDecimalPlaces(num) {
 function numberToWord(num) {
     let decimalPlaces = getDecimalPlaces(num);
     if (num < 20) return WORDS[0][num-1];
+    if (num < 100) {
+        let word = "";
+        word.concat(numberToWord())
+    }
 }
 
 
