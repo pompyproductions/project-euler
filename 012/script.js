@@ -63,22 +63,41 @@ function getPrimeDivisors(num) {
         if (isFactor(prime.value, num)) divs.push(prime.value);
         prime = generator.next();
     }
-    console.log(divs);
+    return new Set(divs);
 }
 
-// const generator = triangleGen();
-// let current = generator.next();
+function countDivisors(num) {
+    let divisors = [num];
+    const primes = getPrimeDivisors(num);
+    // console.log(`getting values from ${num}`)
+    
+    if (primes.size) {
+        primes.forEach(p => {
+            divisors = divisors.concat(countDivisors(num/p));
+        })
+    }
+    // console.log(divisors);
+    return new Set(divisors);
+} // gotta love recursion
 
-// console.time();
-// for (let i = 1; i <= 20; i++) {
-//     // console.log(getDivisors(current.value));
-//     // console.log(getDivisors(current.value).length);
-//     current = generator.next();
-//     if (getDivisors(current.value).length >= 400) {
-//         console.log(`Found solution in ${i} steps`);
-//         break;
-//     }
-// }
-// console.log(getDivisors(current.value));
-// console.log(getDivisors(current.value).length);
-// console.timeEnd();
+// console.log(new Set(countDivisors(30)));
+
+const generator = triangleGen();
+let current = generator.next();
+
+console.time();
+for (let i = 2; i <= 300; i++) {
+    // console.log(getDivisors(current.value));
+    // console.log(getDivisors(current.value).length);
+    current = generator.next();
+    let divs = new Set(countDivisors(current.value)); 
+    if (divs.size > 499) {console.log(current.value);break}
+}
+console.log(new Set(countDivisors(current.value)));
+
+console.timeEnd();
+
+// prev version: 100 iterations, 42ms
+// prev version: 200 iterations, 103ms
+// prev version: 300 iterations, 310ms
+
