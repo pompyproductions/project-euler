@@ -89,22 +89,30 @@ const generator = triangleGen();
 let current = generator.next();
 
 console.time();
-for (let i = 0; i <= 300; i++) {
+for (let i = 0; i <= 15000; i++) {
     current = generator.next();
 
-    if (countDivisors(current.value) > 5) {
+    if (countDivisors(current.value) > 500) {
         console.log(countDivisors(current.value));
         break;
     } 
 }
-
+console.log(current.value);
 console.timeEnd();
 
-// prev version: 100 iterations, 42ms
-// prev version: 200 iterations, 103ms
-// prev version: 300 iterations, 310ms
+// brute version: 100 iterations, 42ms
+// brute version: 200 iterations, 103ms
+// brute version: 300 iterations, 310ms
 
 // new version: 300 iterations, 120ms
 // new version: 500 iterations, 530ms
 // new version: 1000 iterations, 5s
 // new version: 2000 iterations, 53s
+
+// final version: 300 iterations, 22ms
+// final version: 500 iterations, 31ms
+// final version: 1000 iterations, 95ms
+// final version: 2000 iterations, 434ms
+// final version: 5000 iterations, 4.8s
+// final version: 10000 iterations, 32s
+
