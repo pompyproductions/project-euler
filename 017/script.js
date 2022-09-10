@@ -37,6 +37,9 @@ function numberToWord(num) {
         word = word.concat(" ", numberToWord(num * -1));
         return word;
     
+    } if (num % 1) {
+        // write decimals behavior here;
+    
     } if (num < 10) {
         return WORDS[0][num];
 
@@ -63,7 +66,19 @@ function numberToWord(num) {
     // let word = numberToWord(Math.trunc(num / 10));
 }
 
-
+function countLetters(str) {
+    return str.replace(/[ -]/g, "").length;
+}
 
 console.time();
+
+
+let count = 3 + countLetters(WORDS[3][1]); // one thousand
+for (let i=1; i<=999; i++) {
+    count += countLetters(numberToWord(i));
+}
+
+console.log(count);
+
+
 console.timeEnd();
