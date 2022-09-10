@@ -9,7 +9,7 @@ inputArr = []
 
 for line in f1:
     
-    numbersMatch = re.search(r"((\d\d )*(\d\d))<br", line)
+    numbersMatch = re.search(r"((\d\d )*(\d\d))<\/?.{2,4}>$", line)
     if numbersMatch:
         f2.write("    [")
         arr = numbersMatch.groups()[0].split(" ")
