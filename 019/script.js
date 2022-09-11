@@ -24,24 +24,43 @@ function isLeapYear(year) {
     return false;
 }
 
-function skipMonth(year, month) {
-    let days = MONTHS[month - 1];
-    if (month === 2 && isLeapYear(year)) {
-        days++;
-    } else if (month === 12) {
-        currentDate[0]++;
-        currentDate[1] = 0;
+class MonthCount {
+    year;
+    month; 
+    day;
+    
+    constructor(year=1900, month=1) {
+        this.year = year;
+        this.month = month;
+        this.day = 6; // sunday is 0, makes it easier to check for truthiness
     }
-    currentDate[1]++;
-    return days;
 
-
-    // return [year, prevMonth + 1];
+    skipMonth() {
+        let days = MONTHS[this.month - 1];
+        if (this.month === 2 && isLeapYear(this.year)) {
+            days++;
+        } else if (this.month === 12) {
+            this.year++;
+            this.month = 0;
+        }
+        this.month++;
+        this.day = (this.day + days) % 7;
+    }
 }
 
-let currentDate = [1900, 1];
-// currentDate = skipMonth(...currentDate);
-
-
+const a = new MonthCount();
 console.time();
+
+while (a.year < 1900 || a.month < 12) {
+    a.skipMonth();
+}
+
+let sundays = 0;
+while (a.year < 2000 || a.month < 12) {
+    a.skipMonth();
+    if (!a.day) sundays++;
+}
+
+console.log(sundays);
+
 console.timeEnd();
