@@ -2,14 +2,14 @@
 console.log("script.js: flotation device");
 
 function* factorialGen(num=Infinity) {
-    let prev = 1;
-    for (let i=1; i < num; i++) {
+    let prev = 1n;
+    for (let i=1n; i <= num; i++) {
         prev *= i;
         yield prev; 
     }
 }
 
-const generator = factorialGen(10);
+const generator = factorialGen(100n);
 for (let factor of generator) {
     console.log(factor);
 }
