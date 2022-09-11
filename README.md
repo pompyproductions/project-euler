@@ -22,7 +22,22 @@ I'll be updating my approach and goals as I solve along.
 
 ## Devlog
 
-### 2022-09-08
+
+### 2022-09-11: Boilerplate Generator
+
+I started off by manually creating a folder structure for each problem: a root folder ### with index.html and script.js loaded in it.
+
+It shouldn't come as a surprise that this endeavor turned out to be quite the drag, which is why I decided to play around with python a little more and create a script that automatically does that for me.
+
+I can now head over to the templates folder and run the following: 
+```
+$ ./generator.py ###
+```
+
+This creates the two files, but there's no dynamically placed elements yet. I'm thinking of adding "stops" inside the template files, change their extension (.template), and add a conditional in the "for line of file" loop to watch out for them and fill the values in. This way I can load more than one script (for inputs) etc.
+
+
+### 2022-09-08: Generator Sandbox
 
 I had, among others, two expectations when I started to solve these problems.
 
