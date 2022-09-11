@@ -4,10 +4,6 @@ console.log("script.js: flotation device");
 // console.time("Function 1");
 // console.timeEnd("Function 1");
 
-function isFactor(factor, number) {
-    return !(number % factor);
-}
-
 function* primeGen(max=Infinity) {
     yield 2;
     yield 3;
@@ -70,6 +66,23 @@ function sumDivisors(num) {
 
         sum *= count;
     })
-    sum -= num;
+    if (sum > num) sum -= num;
     return sum;
 }
+
+function isAmicable(num) {
+    return (
+        sumDivisors(sumDivisors(num)) === num &&
+        sumDivisors(num) !== num
+    )
+}
+
+
+let amicableSum = 0;
+for (let i = 1; i < 10000; i++) {
+    if (isAmicable(i)) {
+        // console.log(i);
+        amicableSum += i;
+    } 
+}
+console.log(amicableSum);
