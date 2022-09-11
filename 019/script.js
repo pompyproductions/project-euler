@@ -24,11 +24,20 @@ function isLeapYear(year) {
     return false;
 }
 
-// function skipMonth(year, prevMonth) {
-//     if (prevMonth === 2 && ) 
-//     if 
-//     return [year, prevMonth + 1];
-// }
+function skipMonth(year, month) {
+    let days = MONTHS[month - 1];
+    if (month === 2 && isLeapYear(year)) {
+        days++;
+    } else if (month === 12) {
+        currentDate[0]++;
+        currentDate[1] = 0;
+    }
+    currentDate[1]++;
+    return days;
+
+
+    // return [year, prevMonth + 1];
+}
 
 let currentDate = [1900, 1];
 // currentDate = skipMonth(...currentDate);
