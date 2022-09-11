@@ -13,7 +13,23 @@ function alphabetSort(a, b) {
     return a.length - b.length
 }
 
+function getLettersSum(str, alphabet=ALPHABET) {
+    str = str.toLowerCase();
+    let sum = 0;
+    for (let i = 0; i < str.length; i++) {
+        sum += alphabet.indexOf(str.charAt(i)) + 1;
+    }
+    return sum;
+}
 
+console.time("Function 1");
 
-// console.time("Function 1");
-// console.timeEnd("Function 1");
+const ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+let sortedInput = PROBLEM_INPUT.sort(alphabetSort);
+
+let total = 0;
+for (let i = 0; i < sortedInput.length; i++) {
+    total += (i + 1) * getLettersSum(sortedInput[i])
+}
+
+console.timeEnd("Function 1");
