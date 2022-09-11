@@ -10,9 +10,18 @@ function* factorialGen(num=Infinity) {
 }
 
 const generator = factorialGen(100n);
-for (let factor of generator) {
-    console.log(factor);
+let factorial = 1;
+for (let num of generator) {
+    factorial = num;
 }
+console.log(factorial);
+
+let sum = 0n;
+while (factorial >= 1n) {
+    sum += factorial % 10n;
+    factorial /= 10n;
+}
+console.log(sum);
 
 
 // console.time("Function 1");
