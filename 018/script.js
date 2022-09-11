@@ -31,12 +31,12 @@ class Pyramid {
         }
         
         
-        this.current = [0, [[0, this.floors[1][0]]]]; // current floor and an array of paths
+        this.current = [0, [[0, this.floors[0][0]]]]; // current floor and an array of paths
     }
 
     descend([ind, sum]) {
         if (
-            sum + this.maxDescent.slice(this.current[0]+1, this.depth).reduce((acc,val)=>acc+val,0) >
+            sum + this.maxDescent.slice(this.current[0]+1, this.depth).reduce((acc,val)=>acc+val,0) >=
             this.greedyDescent.reduce((acc,val)=>acc+val, 0)
         ) {
             return [
@@ -47,6 +47,7 @@ class Pyramid {
     }
 
     explore() {
+        console.log(`exploring ` + this.floors[this.current[0]+1]);
         const next = [this.current[0] + 1, []]
         for (let path of this.current[1]) {
             let arr = this.descend(path);
@@ -55,23 +56,21 @@ class Pyramid {
         this.current = next;
         return this.current;
     }
-
-    // lookAhead(index) {
-    //     // greedy descent: picks the higher value at every step
-    //     // check if current path
-    //     let sum = 0;
-    //     for (let i = this.current[0]; i < this.depth; i++) {
-    //         let best = this.floors[i][index];
-    //         if (this.floors[i][index + 1] > best) {
-    //             best = this.floors[i][index++ + 1];
-    //         }
-    //         sum += best;
-    //     }
-    //     console.log(sum);
-    // }
 }
 
-
-
+const pyramid = new Pyramid(PROBLEM_INPUT);
+console.log(pyramid.current);
 console.time();
+
+while (pyramid.current[0] < pyramid.depth - 1) {
+    pyramid.explore();
+}
 console.timeEnd();
+console.log(pyramid.current[0]);
+console.table(pyramid.current[1]);
+
+// console.table(pyramid.current[1]);
+
+console.log(pyramid.current[1].reduce((acc, val) => val[1] > acc ? val[1] : acc, 0));
+
+
