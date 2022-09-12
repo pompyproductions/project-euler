@@ -69,21 +69,31 @@ function sumDivisors(num) {
 
 function* abundantGen(max=Infinity) {
     let current = 12;
-    yield current;
     while (current <= max) {
-        current++;
-        if (current > sumDivisors(current)) {
+        if (current < sumDivisors(current)) {
             yield current;
         }
+        current++;
     }
 }
 
-const generator = abundantGen(Math.trunc(28123));
+function testAbundant(abundant, total, arr=abundants) {
+    for (let i = 0; i < arr.length; i++) {
+        if ((total - abundant) === arr[i]) return true;
+        if ((total - abundant) < arr[i]) return false;
+    }
+}
+// takes abundant list as parameter
+// so as to not repeat the operation
+
+const generator = abundantGen(Math.trunc(28123 / 2));
 console.time("Function 1");
 
 let abundants = [];
 for (let num of generator) {
     abundants.push(num);
 }
+
+
 console.timeEnd("Function 1");
 console.log(abundants);
