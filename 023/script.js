@@ -70,7 +70,7 @@ function sumDivisors(num) {
 function* abundantGen(max=Infinity) {
     let current = 12;
     yield current;
-    while (current < max) {
+    while (current <= max) {
         current++;
         if (current > sumDivisors(current)) {
             yield current;
@@ -78,8 +78,12 @@ function* abundantGen(max=Infinity) {
     }
 }
 
-const generator = abundantGen();
+const generator = abundantGen(Math.trunc(28123));
+console.time("Function 1");
 
-
-// console.time("Function 1");
-// console.timeEnd("Function 1");
+let abundants = [];
+for (let num of generator) {
+    abundants.push(num);
+}
+console.timeEnd("Function 1");
+console.log(abundants);
