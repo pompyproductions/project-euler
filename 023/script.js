@@ -83,6 +83,14 @@ function testAbundant(abundant, total, arr=abundantsAll) {
         if ((total - abundant) < arr[i]) return false;
     }
 }
+
+function sliceUpTo(arr, val) {
+    // assumes array is ordered
+    for (let i=0; i < arr.length; i++) {
+        if (arr[i] > val) return arr.slice(0, i);
+    }
+    return arr;
+}
 // takes abundant list as parameter
 // so as to not repeat the operation
 
@@ -90,15 +98,29 @@ const generator = abundantGen(28123);
 console.time("Function 1");
 
 let abundantsAll = [];
-let abundantsHalf = [];
 for (let num of generator) {
     abundantsAll.push(num);
-    if (num < Math.trunc(28123 / 2)) abundantsHalf.push(num);
 }
 
 console.timeEnd("Function 1");
-console.log(abundantsHalf);
-console.log(abundantsAll);
+const nonAbundantSums = []
+
+console.time("Function 2");
+for (let i = 1; i <= 28123; i++) {
+    let testSet = sliceUpTo(abundantsAll, i - 12);
+    let isNonAbundant = true;
+    for (let a of testSet) {
+        if (testAbundant(a, i)) {
+            isNonAbundant = false;
+            break;
+        }
+    }
+   if (isNonAbundant) nonAbundantSums.push(i)
+}
+console.timeEnd("Function 2");
+
+console.log(nonAbundantSums)
+console.log(nonAbundantSums.reduce((acc, val)=> acc + val, 0))
 
 // start from i = 25; i < 28123; i++
 // slice abundants up to current number - 12 (write function for that)
