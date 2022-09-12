@@ -77,7 +77,7 @@ function* abundantGen(max=Infinity) {
     }
 }
 
-function testAbundant(abundant, total, arr=abundants) {
+function testAbundant(abundant, total, arr=abundantsAll) {
     for (let i = 0; i < arr.length; i++) {
         if ((total - abundant) === arr[i]) return true;
         if ((total - abundant) < arr[i]) return false;
@@ -86,14 +86,25 @@ function testAbundant(abundant, total, arr=abundants) {
 // takes abundant list as parameter
 // so as to not repeat the operation
 
-const generator = abundantGen(Math.trunc(28123 / 2));
+const generator = abundantGen(28123);
 console.time("Function 1");
 
-let abundants = [];
+let abundantsAll = [];
+let abundantsHalf = [];
 for (let num of generator) {
-    abundants.push(num);
+    abundantsAll.push(num);
+    if (num < Math.trunc(28123 / 2)) abundantsHalf.push(num);
 }
 
-
 console.timeEnd("Function 1");
-console.log(abundants);
+console.log(abundantsHalf);
+console.log(abundantsAll);
+
+// start from i = 25; i < 28123; i++
+// slice abundants up to current number - 12 (write function for that)
+// test abundants starting from highest number (let testSet = abundantsAll.slice(...))
+// if there is a hit, continue, (...)
+
+// for (let i = 25; i < 100; i++) {
+//     testAbundant(12, i)
+// }
